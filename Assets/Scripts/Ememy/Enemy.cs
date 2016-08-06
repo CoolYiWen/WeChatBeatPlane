@@ -12,11 +12,13 @@ public class Enemy : MonoBehaviour {
     private bool isHit = false;//是否被击中
 
     private Animator anim;
+    private BoxCollider2D boxCollider;
 
     //获取组件
     void Awake () 
     {
         anim = GetComponent<Animator>();
+        boxCollider = GetComponent<BoxCollider2D>();
 	}
 
     void Update()
@@ -52,6 +54,7 @@ public class Enemy : MonoBehaviour {
         {
             case 1:
                 anim.SetBool("Dead", true);
+                boxCollider.enabled = false;
                 yield return new WaitForSeconds(0.25f);//延时以播放爆炸动画
                 Destroy(this.gameObject);
                 break;
@@ -64,6 +67,7 @@ public class Enemy : MonoBehaviour {
 
             case 3:
                 anim.SetBool("Dead", true);   
+                boxCollider.enabled = false;
                 yield return new WaitForSeconds(0.42f);//延时更长的时间以播放爆炸动画 
                 Destroy(this.gameObject);
                 break;
